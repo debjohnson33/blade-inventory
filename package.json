@@ -1,0 +1,15 @@
+{
+  "name": "blade-inventory",
+  "version": "1.0.0",
+  "description": "Inventory app to keep track of lawnmower blades",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+  	"type": "git",
+  	"url": "/home/debjohnson/code/electron-apps/blade-inventory/.git/"
+  },
+  "author": "Deb Johnson",
+  "license": "MIT"
+}
