@@ -25,7 +25,9 @@
 
 		function submitForm(e) {
 			e.preventDefault();
-			console.log('Made it here!');
+			const stens = document.querySelector('#stens').value;
+			const quantity = document.querySelector('#quantity').value;
+			ipcRenderer.send('blades:add', stens, quantity);
 		}
 	</script>
 </body>

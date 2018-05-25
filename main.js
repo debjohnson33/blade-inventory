@@ -53,6 +53,11 @@ function createAddWindow() {
 		addWindow = null;
 	});
 }
+// Catch blades:add
+ipcMain.on('blades:add', function(e, stens, quantity){
+	mainWindow.webContents.send('blades:add', stens, quantity);
+	addWindow.close();
+})
 
 // Create menu Template
 const mainMenuTemplate = [
