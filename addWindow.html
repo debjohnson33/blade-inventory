@@ -6,8 +6,8 @@
 <body>
 	<form>
 		<div>
-			<label>Sten Number:</label>
-			<input type="text" id="sten" autofocus>
+			<label>Stens Number:</label>
+			<input type="text" id="stens" autofocus>
 		</div>
 		<div>
 			<label>Quantity:</label>
@@ -15,5 +15,18 @@
 		</div>
 		<button type="submit">Add Blades</button>
 	</form>
+
+	<script>
+		const electron = require('electron');
+		const {ipcRenderer} = electron;
+
+		const form = document.querySelector('form');
+		form.addEventListener('submit', submitForm);
+
+		function submitForm(e) {
+			e.preventDefault();
+			console.log('Made it here!');
+		}
+	</script>
 </body>
 </html>
