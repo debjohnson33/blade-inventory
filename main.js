@@ -34,13 +34,36 @@ app.on('ready', function(){
 	Menu.setApplicationMenu(mainMenu);
 });
 
+// Hanlde create add window
+function createAddWindow() {
+	// Create new window
+	addWindow = new BrowserWindow({
+		width: 300,
+		height: 200,
+		title: 'Add Blades'
+	});
+	// Load html into window
+	addWindow.loadURL(url.format({
+		pathname: path.join(__dirname, 'mainWindow.html'),
+		protocol: 'file:',
+		slashes: true
+	}));
+	// Garbage collection handle
+	addWindow.on('close', function () {
+		addWindow = null;
+	});
+}
+
 // Create menu Template
 const mainMenuTemplate = [
 	{
 		label:'File',
 		submenu:[
 			{
-				label: 'Add Item'
+				label: 'Add Item',
+				click() {
+					createAddWindow();
+				}
 			},
 			{
 				label: 'Quit',
