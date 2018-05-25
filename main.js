@@ -4,6 +4,14 @@ const path = require('path');
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
+// Use knex to set database
+var knex = require('knex')({
+	client: 'sqlite3',
+	connection: {
+		filename: './database.sqlite3'
+	}
+});
+
 // SET ENV
 
 let mainWindow;
