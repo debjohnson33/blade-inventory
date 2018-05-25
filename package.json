@@ -4,7 +4,8 @@
   "description": "Inventory app to keep track of lawnmower blades",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "rebuild": "electron-rebuild -f -w sqlite3"
   },
   "repository": {
     "type": "git",
@@ -13,6 +14,11 @@
   "author": "Deb Johnson",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^2.0.2"
+    "electron": "^2.0.2",
+    "electron-rebuild": "^1.7.3"
+  },
+  "dependencies": {
+    "knex": "^0.14.6",
+    "sqlite3": "^4.0.0"
   }
 }
