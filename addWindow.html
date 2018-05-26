@@ -19,6 +19,12 @@
 	<script>
 		const electron = require('electron');
 		const {ipcRenderer} = electron;
+		var knex = require('knex')({
+			client: 'sqlite3',
+			connection: {
+				filename: './database.sqlite3'
+			}
+		});
 
 		const form = document.querySelector('form');
 		form.addEventListener('submit', submitForm);
@@ -27,6 +33,10 @@
 			e.preventDefault();
 			const stens = document.querySelector('#stens').value;
 			const quantity = document.querySelector('#quantity').value;
+			const newBlades = {stensNumber: stens, quantity: quantity};
+			knex('blades').insert(newBlades).then(function (id) {
+				console.log(id);
+			})
 			ipcRenderer.send('blades:add', stens, quantity);
 		}
 	</script>
