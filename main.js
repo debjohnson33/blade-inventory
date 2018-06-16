@@ -8,7 +8,7 @@ const {app, BrowserWindow, Menu, ipcMain} = electron;
 var knex = require('knex')({
 	client: 'sqlite3',
 	connection: {
-		filename: './database.sqlite3'
+		filename: './dev.sqlite3'
 	},
 	useNullAsDefault: true
 });
