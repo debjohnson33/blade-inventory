@@ -5,13 +5,13 @@ const path = require('path');
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
 // Use knex to set database
-var knex = require('knex')({
-	client: 'sqlite3',
-	connection: {
-		filename: './dev.sqlite3'
-	},
-	useNullAsDefault: true
-});
+// var knex = require('knex')({
+// 	client: 'sqlite3',
+// 	connection: {
+// 		filename: './dev.sqlite3'
+// 	},
+// 	useNullAsDefault: true
+// });
 
 // SET ENV
 
