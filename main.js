@@ -15,7 +15,7 @@ db.serialize(function () {
   });
 });
 
-db.close();
+//db.close();
 // SET ENV
 
 let mainWindow;
@@ -60,6 +60,12 @@ function createAddWindow() {
 // Catch blades:add
 ipcMain.on('blades:add', function(e, stens, quantity){
 	mainWindow.webContents.send('blades:add', stens, quantity);
+	db.serialize(function () {
+
+	  db.run("INSERT INTO Blades (?, ?)", [stens, quantity]);
+
+	  console.log(`A row has been inserted with rowid ${this.lastID}`);
+	});
 	addWindow.close();
 })
 

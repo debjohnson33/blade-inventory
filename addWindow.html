@@ -29,16 +29,11 @@
 
 		function submitForm(e) {
 			e.preventDefault();
-			const stens = document.querySelector('#stens').value;
-			const quantity = document.querySelector('#quantity').value;
-			const newBlades = [stens, quantity];
+			let stens = document.querySelector('#stens').value;
+			let quantity = document.querySelector('#quantity').value;
+			let newBlades = [stens, quantity];
 			
-			db.serialize(function () {
-
-			  db.run("INSERT INTO Blades (?, ?)", newBlades);
-
-			  console.log(`A row has been inserted with rowid ${this.lastID}`);
-			});
+			
 			ipcRenderer.send('blades:add', stens, quantity);
 		}
 	</script>
