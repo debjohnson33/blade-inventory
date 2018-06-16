@@ -4,15 +4,21 @@ const path = require('path');
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
-// Use knex to set database
-// var knex = require('knex')({
-// 	client: 'sqlite3',
-// 	connection: {
-// 		filename: './dev.sqlite3'
-// 	},
-// 	useNullAsDefault: true
-// });
+const sqlite3 = require('sqlite3');
 
+var db = new sqlite3.Database('dev.sqlite3');
+
+db.serialize(function () {
+  db.run("CREATE TABLE Blades (stensNumber, quantity)");
+
+  db.run("INSERT INTO Blades VALUES (?, ?)", ['101', 20]);
+  db.run("INSERT INTO Blades VALUES (?, ?)", ['102', 40]);
+  db.run("INSERT INTO Blades VALUES (?, ?)", ['103', 60]);
+
+  db.each("SELECT * FROM Blades", function (err, row) {
+    console.log(row);
+  });
+});
 // SET ENV
 
 let mainWindow;
