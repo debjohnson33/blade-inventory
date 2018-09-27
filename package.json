@@ -14,10 +14,10 @@
   "author": "Deb Johnson",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^2.0.2",
+    "electron": "^2.0.8",
     "electron-rebuild": "^1.7.3"
   },
   "dependencies": {
-    "sqlite3": "^4.0.0"
+    "sqlite3": "^4.0.2"
   }
 }
