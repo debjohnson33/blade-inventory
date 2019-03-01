@@ -9,16 +9,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "/home/debjohnson/code/electron-apps/blade-inventory/.git/"
+    "url": "/home/debjohnson/code/blade-inventory/.git/"
   },
   "author": "Deb Johnson",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^2.0.8",
     "electron-rebuild": "^1.7.3"
   },
   "dependencies": {
+    "electron": "^2.0.17",
     "request": "^2.88.0",
-    "sqlite3": "^4.0.2"
+    "sqlite3": "^4.0.6"
   }
 }
