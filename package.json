@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "rebuild": "electron-rebuild -f -w sqlite3"
+    "rebuild": "electron-rebuild -f -w sqlite3",
+    "postinstall": "electron-builder install-app-deps"
   },
   "repository": {
     "type": "git",
@@ -14,6 +15,7 @@
   "author": "Deb Johnson",
   "license": "MIT",
   "devDependencies": {
+    "electron-builder": "^20.43.0",
     "electron-rebuild": "^1.7.3"
   },
   "dependencies": {
