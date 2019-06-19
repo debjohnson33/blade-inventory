@@ -11,7 +11,8 @@
 		const electron = require('electron');
 		const {ipcRenderer} = electron;
 		const ul = document.querySelector('ul');
-
+		// Load existing blades
+		ipcRenderer.send('blades:load', bladesArray);
 		// Add blades
 		ipcRenderer.on('blades:add', function(e, stens, quantity){
 			const li = document.createElement('li');

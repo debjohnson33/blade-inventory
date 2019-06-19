@@ -7,11 +7,13 @@ const {app, BrowserWindow, Menu, ipcMain} = electron;
 const sqlite3 = require('sqlite3');
 
 var db = new sqlite3.Database('dev.sqlite3');
+let bladesArray = [];
 
 db.serialize(function () {
 
   db.each("SELECT * FROM Blades", function (err, row) {
-    console.log(row);
+	bladesArray.push(row);	
+	console.log(bladesArray);
   });
 });
 
@@ -68,6 +70,11 @@ ipcMain.on('blades:add', function(e, stens, quantity){
 	});
 	addWindow.close();
 })
+
+// Catch blades:load
+ipcMain.on('blades:load', function(e, bladesArray) {
+	e.sender.send('blades:load', bladesArray);
+});
 
 // Create menu Template
 const mainMenuTemplate = [
