@@ -35,7 +35,21 @@
 			li.appendChild(bladesText);
 			ul.appendChild(li);
 		});
-
+		// Search for blades
+		list = document.querySelector('ul');
+		const searchBar = document.forms['search-blades'].querySelector('input');
+		searchBar.addEventListener('keyup', (e) => {
+			const term = e.target.value;
+			const blades = list.getElementsByTagName('li');
+			Array.from(blades).forEach((blade) => {
+				const stensNumber = blade.textContent;
+				if (stensNumber.indexOf(e.target.value) != -1) {
+					blade.style.display = 'block';
+				} else {
+					blade.style.display = 'none';
+				}
+			})
+		})
 	</script>
 </body>
 </html>
