@@ -38,6 +38,10 @@
 			li.appendChild(bladesText);
 			ul.appendChild(li);
 		});
+		// Delete blades
+		ipcRenderer.on('blades:delete', function(e, stens){
+			
+		})
 		// Search for blades
 		list = document.querySelector('ul');
 		const searchBar = document.forms['search-blades'].querySelector('input');
