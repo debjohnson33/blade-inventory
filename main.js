@@ -7,31 +7,36 @@ const {app, BrowserWindow, Menu, ipcMain} = electron;
 const sqlite3 = require('sqlite3');
 
 var db = new sqlite3.Database('dev.sqlite3');
-let bladesArray = [];
 
-db.serialize(function () {
-
-  db.each("SELECT * FROM Blades", function (err, row) {
-	bladesArray.push(row);	
-	console.log(bladesArray);
-  });
-});
-
-//db.close();
 // SET ENV
 
 let mainWindow;
 let addWindow;
 
 app.on('ready', function(){
-	mainWindow = new BrowserWindow({});
+	mainWindow = new BrowserWindow({show: false});
+	let bladesArray = [];
+
+	db.serialize(function () {
+		// Loads each row into the blades array
+		db.each("SELECT * FROM Blades", function (err, row) {
+			bladesArray.push(row);	
+		});
+	});
+
 	mainWindow.loadURL(url.format({
 		pathname: path.join(__dirname, 'mainWindow.html'),
 		protocol: 'file:',
-		slashes: true
+		slashes: true,
 	}));
+	mainWindow.once("ready-to-show", () => { mainWindow.show() })
+	// Sends blades array to mainWindow
+	ipcMain.on("mainWindowLoaded", function () {
+		mainWindow.webContents.send("resultSent", bladesArray)
+	});
 
 	mainWindow.on('closed', function(){
+		db.close();
 		app.quit();
 	});
 
@@ -70,11 +75,6 @@ ipcMain.on('blades:add', function(e, stens, quantity){
 	});
 	addWindow.close();
 })
-
-// Catch blades:load
-ipcMain.on('blades:load', function(e, bladesArray) {
-	e.sender.send('blades:load', bladesArray);
-});
 
 // Create menu Template
 const mainMenuTemplate = [
