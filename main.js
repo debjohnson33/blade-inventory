@@ -75,6 +75,14 @@ ipcMain.on('blades:add', function(e, stens, quantity){
 	});
 	addWindow.close();
 })
+// Catch blades:delete
+ipcMain.on('blades:delete', function(e, stens) {
+	mainWindow.webContents.send('blades:delete', stens);
+	db.serialize(function () {
+		db.run("DELETE FROM Blades WHERE stensNumber=?", stens);
+		console.log(`Those blades have been deleted`);
+	});
+})
 
 // Create menu Template
 const mainMenuTemplate = [
