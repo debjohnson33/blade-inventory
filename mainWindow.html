@@ -22,8 +22,11 @@
 				console.log(result);
 				for (var i = 0; i < result.length; i++) {
 					const li = document.createElement('li');
+					const button = document.createElement('button');
+					button.innerHTML = "Delete Blade"
 					const bladesText = document.createTextNode('Stens: ' + result[i].stensNumber + ' ' + 'Quantity: ' + result[i].quantity);
 					li.appendChild(bladesText);
+					li.appendChild(button);
 					ul.appendChild(li);
 				}
 			})
