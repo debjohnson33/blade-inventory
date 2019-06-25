@@ -19,10 +19,6 @@
 	<script>
 		const electron = require('electron');
 		const {ipcRenderer} = electron;
-
-		const sqlite3 = require('sqlite3');
-
-		var db = new sqlite3.Database('dev.sqlite3');
 		
 		const form = document.querySelector('form');
 		form.addEventListener('submit', submitForm);
@@ -32,7 +28,6 @@
 			let stens = document.querySelector('#stens').value;
 			let quantity = document.querySelector('#quantity').value;
 			let newBlades = [stens, quantity];
-			
 			
 			ipcRenderer.send('blades:add', stens, quantity);
 		}
