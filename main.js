@@ -69,7 +69,7 @@ ipcMain.on('blades:add', function(e, stens, quantity){
 	mainWindow.webContents.send('blades:add', stens, quantity);
 	db.serialize(function () {
 
-	  db.run("INSERT INTO Blades (?, ?)", [stens, quantity]);
+	  db.run("INSERT INTO Blades VALUES (?, ?)", [stens, quantity]);
 
 	  console.log(`A row has been inserted with rowid ${this.lastID}`);
 	});
