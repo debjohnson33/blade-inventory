@@ -42,11 +42,14 @@
 		ipcRenderer.on('blades:add', function(e, stens, quantity){
 			const li = document.createElement('li');
 			const button = document.createElement('button');
+			const editButton = document.createElement('button');
+			editButton.innerHTML = "Edit Blade"
+			editButton.className = "edit"
 			button.innerHTML = "Delete Blade";
 			button.class = "delete";
-			li.id = result[i].stensNumber;
 			const bladesText = document.createTextNode('Stens: ' + stens + ' ' + 'Quantity: ' + quantity);
 			li.appendChild(bladesText);
+			li.appendChild(editButton);
 			li.addEventListener('click', deleteBlade);
 			ul.appendChild(li);
 		});
