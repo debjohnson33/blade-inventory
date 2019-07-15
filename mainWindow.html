@@ -23,11 +23,17 @@
 				for (var i = 0; i < result.length; i++) {
 					const li = document.createElement('li');
 					const button = document.createElement('button');
+					const editButton = document.createElement('button');
+					editButton.innerHTML = "Edit Blade"
+					editButton.className = "edit"
 					button.innerHTML = "Delete Blade"
-					button.id = "delete"
+					button.className = "delete"
+					li.id = result[i].stensNumber;
 					const bladesText = document.createTextNode('Stens: ' + result[i].stensNumber + ' ' + 'Quantity: ' + result[i].quantity);
 					li.appendChild(bladesText);
+					li.appendChild(editButton);
 					li.appendChild(button);
+					li.addEventListener('click', deleteBlade);
 					ul.appendChild(li);
 				}
 			})
@@ -37,16 +43,19 @@
 			const li = document.createElement('li');
 			const button = document.createElement('button');
 			button.innerHTML = "Delete Blade";
-			button.id = "delete";
+			button.class = "delete";
+			li.id = result[i].stensNumber;
 			const bladesText = document.createTextNode('Stens: ' + stens + ' ' + 'Quantity: ' + quantity);
 			li.appendChild(bladesText);
+			li.addEventListener('click', deleteBlade);
 			ul.appendChild(li);
 		});
 		// Delete blades
-		document.getElementById('delete').addEventListener('click', deleteBlade);
+		//document.getElementById('delete').addEventListener('click', deleteBlade);
 
 		function deleteBlade(e) {
 			e.preventDefault();
+			console.log("Called Delete")
 			// let stens = document.querySelector('#stens').value;
 			// Need a way to retrieve the stens number out of the text
 			ipcRenderer.send('blades:delete', stens);
