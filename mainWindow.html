@@ -15,6 +15,7 @@
 		const electron = require('electron');
 		const {ipcRenderer} = electron;
 		const ul = document.querySelector('ul');
+	
 		// Load existing blades
 		document.addEventListener("DOMContentLoaded", function() {
 			ipcRenderer.send("mainWindowLoaded")
@@ -22,18 +23,13 @@
 				console.log(result);
 				for (var i = 0; i < result.length; i++) {
 					const li = document.createElement('li');
-					const button = document.createElement('button');
 					const editButton = document.createElement('button');
 					editButton.innerHTML = "Edit Blade"
 					editButton.className = "edit"
-					button.innerHTML = "Delete Blade"
-					button.className = "delete"
-					li.id = result[i].stensNumber;
+					li.setAttribute('stens-number', result[i].stensNumber);
 					const bladesText = document.createTextNode('Stens: ' + result[i].stensNumber + ' ' + 'Quantity: ' + result[i].quantity);
 					li.appendChild(bladesText);
 					li.appendChild(editButton);
-					li.appendChild(button);
-					li.addEventListener('click', deleteBlade);
 					ul.appendChild(li);
 				}
 			})
@@ -45,17 +41,14 @@
 			const editButton = document.createElement('button');
 			editButton.innerHTML = "Edit Blade"
 			editButton.className = "edit"
-			button.innerHTML = "Delete Blade";
-			button.class = "delete";
 			const bladesText = document.createTextNode('Stens: ' + stens + ' ' + 'Quantity: ' + quantity);
 			li.appendChild(bladesText);
 			li.appendChild(editButton);
-			li.addEventListener('click', deleteBlade);
 			ul.appendChild(li);
 		});
 		// Delete blades
 		//document.getElementById('delete').addEventListener('click', deleteBlade);
-
+		
 		function deleteBlade(e) {
 			e.preventDefault();
 			console.log("Called Delete")
