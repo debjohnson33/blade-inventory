@@ -24,12 +24,18 @@
 				for (var i = 0; i < result.length; i++) {
 					const li = document.createElement('li');
 					const editButton = document.createElement('button');
-					editButton.innerHTML = "Edit Blade"
-					editButton.className = "edit"
+					const deleteButton = document.createElement('button');
+					deleteButton.innerHTML = "Delete Blade";
+					deleteButton.className = "delete";
+					deleteButton.setAttribute("id", result[i].stensNumber);
+					deleteButton.onclick = deleteBlade;
+					editButton.innerHTML = "Edit Blade";
+					editButton.className = "edit";
 					li.setAttribute('stens-number', result[i].stensNumber);
 					const bladesText = document.createTextNode('Stens: ' + result[i].stensNumber + ' ' + 'Quantity: ' + result[i].quantity);
 					li.appendChild(bladesText);
 					li.appendChild(editButton);
+					li.appendChild(deleteButton);
 					ul.appendChild(li);
 				}
 			})
@@ -51,14 +57,15 @@
 		
 		function deleteBlade(e) {
 			e.preventDefault();
-			console.log("Called Delete")
+			let stens = e.target.id;
+			console.log(stens)
 			// let stens = document.querySelector('#stens').value;
 			// Need a way to retrieve the stens number out of the text
 			ipcRenderer.send('blades:delete', stens);
 		}
 		
 		// Search for blades
-		list = document.querySelector('ul');
+		let list = document.querySelector('ul');
 		const searchBar = document.forms['search-blades'].querySelector('input');
 		searchBar.addEventListener('keyup', (e) => {
 			const term = e.target.value;
