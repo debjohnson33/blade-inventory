@@ -31,6 +31,8 @@
 					deleteButton.onclick = deleteBlade;
 					editButton.innerHTML = "Edit Blade";
 					editButton.className = "edit";
+					editButton.setAttribute("id", result[i].stensNumber);
+					editButton.onclick = editBlade;
 					li.setAttribute('stens-number', result[i].stensNumber);
 					const bladesText = document.createTextNode('Stens: ' + result[i].stensNumber + ' ' + 'Quantity: ' + result[i].quantity);
 					li.appendChild(bladesText);
@@ -59,11 +61,16 @@
 			e.preventDefault();
 			let stens = e.target.id;
 			console.log(stens)
-			// let stens = document.querySelector('#stens').value;
-			// Need a way to retrieve the stens number out of the text
 			ipcRenderer.send('blades:delete', stens);
 		}
-		
+		// Send call back to main to open edit window
+		function editBlade(e) {
+			e.preventDefault();
+			let stens = e.target.id;
+			console.log(stens);
+			// ipcRenderer.send('blades:edit', stens);
+		}
+
 		// Search for blades
 		let list = document.querySelector('ul');
 		const searchBar = document.forms['search-blades'].querySelector('input');
