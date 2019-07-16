@@ -67,8 +67,8 @@
 		function editBlade(e) {
 			e.preventDefault();
 			let stens = e.target.id;
-			console.log(stens);
-			// ipcRenderer.send('blades:edit', stens);
+			//console.log(stens);
+			ipcRenderer.send('blades:edit', stens);
 		}
 
 		// Search for blades
