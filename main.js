@@ -105,9 +105,9 @@ ipcMain.on('blades:delete', function(e, stens) {
 })
 
 // Catch blades:edit
-ipcMain.on('blades:edit', function(e, stens) {
-	mainWindow.webContents.send('blades:edit', stens);
-	console.log(stens);
+ipcMain.on('blades:edit', function(e, blade) {
+	mainWindow.webContents.send('blades:edit', blade);
+	console.log(blade);
 	createEditWindow();
 })
 // Create menu Template

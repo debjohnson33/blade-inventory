@@ -32,6 +32,7 @@
 					editButton.innerHTML = "Edit Blade";
 					editButton.className = "edit";
 					editButton.setAttribute("id", result[i].stensNumber);
+					editButton.setAttribute("quantity", result[i].quantity);
 					editButton.onclick = editBlade;
 					li.setAttribute('stens-number', result[i].stensNumber);
 					const bladesText = document.createTextNode('Stens: ' + result[i].stensNumber + ' ' + 'Quantity: ' + result[i].quantity);
@@ -66,9 +67,9 @@
 		// Send call back to main to open edit window
 		function editBlade(e) {
 			e.preventDefault();
-			let stens = e.target.id;
-			//console.log(stens);
-			ipcRenderer.send('blades:edit', stens);
+			let blade = [e.target.id, e.target.quantity]
+			console.log(blade);
+			ipcRenderer.send('blades:edit', blade);
 		}
 
 		// Search for blades
