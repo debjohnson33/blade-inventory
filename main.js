@@ -45,7 +45,7 @@ app.on('ready', function(){
 	Menu.setApplicationMenu(mainMenu);
 });
 
-// Hanlde create add window
+// Handle create add window
 function createAddWindow() {
 	// Create new window
 	addWindow = new BrowserWindow({
@@ -62,6 +62,26 @@ function createAddWindow() {
 	// Garbage collection handle
 	addWindow.on('close', function () {
 		addWindow = null;
+	});
+}
+
+// Handle create edit window
+function createEditWindow() {
+	// Create edit window
+	editWindow = new BrowserWindow({
+		width: 300,
+		height: 200,
+		title: 'Edit Blades'
+	});
+	// Load html into window
+	editWindow.loadURL(url.format({
+		pathname: path.join(__dirname, 'editWindow.html'),
+		protocol: 'file:',
+		slashes: true
+	}));
+	// Garbage collection handle
+	editWindow.on('close', function () {
+		editWindow = null;
 	});
 }
 // Catch blades:add
@@ -93,6 +113,12 @@ const mainMenuTemplate = [
 				label: 'Add Item',
 				click() {
 					createAddWindow();
+				}
+			},
+			{
+				label: 'Edit Item',
+				click() {
+					createEditWindow();
 				}
 			},
 			{
