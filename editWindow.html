@@ -22,7 +22,10 @@
 		
 		const form = document.querySelector('form');
 		ipcRenderer.on('blades:update', function(e, blade) {
-			console.log(blade.stens);
+			let stensField = document.getElementById('stens');
+			let quantity = document.getElementById('quantity');
+			stensField.setAttribute('placeholder', blade.stens);
+			quantity.setAttribute('placeholder', blade.quantity);
 		});
 		// form.addEventListener('submit', submitForm);
 		
