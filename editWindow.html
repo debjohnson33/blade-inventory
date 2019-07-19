@@ -27,16 +27,16 @@
 			stensField.setAttribute('placeholder', blade.stens);
 			quantity.setAttribute('placeholder', blade.quantity);
 		});
-		// form.addEventListener('submit', submitForm);
+		form.addEventListener('submit', submitForm);
 		
-		// function submitForm(e) {
-		// 	e.preventDefault();
-		// 	let stens = document.querySelector('#stens').value;
-		// 	let quantity = document.querySelector('#quantity').value;
-		// 	let newBlades = [stens, quantity];
+		function submitForm(e) {
+			e.preventDefault();
+			let stens = document.querySelector('#stens').value;
+			let quantity = document.querySelector('#quantity').value;
+			let newBlades = [stens, quantity];
 			
-		// 	ipcRenderer.send('blades:add', stens, quantity);
-		// }
+			ipcRenderer.send('blades:update', newBlades);
+		}
 	</script>
 </body>
 </html>

@@ -111,6 +111,11 @@ ipcMain.on('blades:edit', function(e, blade) {
 		editWindow.webContents.send('blades:update', blade);
 	})
 })
+
+// Catch blades:update
+ipcMain.on('blades:update', function(e, blade) {
+	console.log(blade);
+})
 // Create menu Template
 const mainMenuTemplate = [
 	{
