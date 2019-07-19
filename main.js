@@ -114,7 +114,12 @@ ipcMain.on('blades:edit', function(e, blade) {
 
 // Catch blades:update
 ipcMain.on('blades:update', function(e, blade) {
-	console.log(blade);
+	db.serialize(function() {
+		db.run("UPDATE Blades SET stensNumber=? WHERE stensNumber=?", [blade.stens, blade.placeholderStens]);
+		db.run("UPDATE Blades SET quantity=? WHERE stensNumber=?", [blade.quantity, blade.stens]);
+		let newBlade = db.run("SELECT * FROM Blades WHERE stensNumber=?", blade.stens)
+	})
+	editWindow.close();
 })
 // Create menu Template
 const mainMenuTemplate = [

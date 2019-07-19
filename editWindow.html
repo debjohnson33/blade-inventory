@@ -33,7 +33,9 @@
 			e.preventDefault();
 			let stens = document.querySelector('#stens').value;
 			let quantity = document.querySelector('#quantity').value;
-			let newBlades = [stens, quantity];
+			let stensField = document.getElementById('stens');
+			let placeholder = stensField.placeholder;
+			let newBlades = {'placeholderStens': placeholder, 'stens': stens, 'quantity': quantity};
 			
 			ipcRenderer.send('blades:update', newBlades);
 		}
