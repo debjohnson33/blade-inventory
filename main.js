@@ -69,8 +69,8 @@ function createAddWindow() {
 function createEditWindow() {
 	// Create edit window
 	editWindow = new BrowserWindow({
-		width: 300,
-		height: 200,
+		width: 400,
+		height: 300,
 		title: 'Edit Blades'
 	});
 	// Load html into window
@@ -106,9 +106,10 @@ ipcMain.on('blades:delete', function(e, stens) {
 
 // Catch blades:edit
 ipcMain.on('blades:edit', function(e, blade) {
-	mainWindow.webContents.send('blades:edit', blade);
-	console.log(blade);
 	createEditWindow();
+	editWindow.webContents.once('dom-ready', () => {
+		editWindow.webContents.send('blades:update', blade);
+	})
 })
 // Create menu Template
 const mainMenuTemplate = [
