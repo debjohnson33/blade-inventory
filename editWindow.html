@@ -21,8 +21,11 @@
 		const {ipcRenderer} = electron;
 		
 		const form = document.querySelector('form');
+		ipcRenderer.on('blades:update', function(e, blade) {
+			console.log(blade.stens);
+		});
 		// form.addEventListener('submit', submitForm);
-
+		
 		// function submitForm(e) {
 		// 	e.preventDefault();
 		// 	let stens = document.querySelector('#stens').value;
