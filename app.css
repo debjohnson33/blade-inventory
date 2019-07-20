@@ -1,0 +1,24 @@
+body {
+    background-color: #F1E3F3;
+}
+
+h1 {
+    color: #9B287B;
+}
+
+h2 {
+    color: #3EB22C;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    color: #540D6E;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+button {
+    background-color: #FFE66D;
+}
