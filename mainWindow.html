@@ -34,7 +34,7 @@
 					editButton.setAttribute("id", result[i].stensNumber);
 					editButton.setAttribute("value", result[i].quantity);
 					editButton.onclick = editBlade;
-					li.setAttribute('stens-number', result[i].stensNumber);
+					li.setAttribute('id', result[i].stensNumber);
 					const bladesText = document.createTextNode('Stens: ' + result[i].stensNumber + ' ' + 'Quantity: ' + result[i].quantity);
 					li.appendChild(bladesText);
 					li.appendChild(editButton);
@@ -71,6 +71,33 @@
 			
 			ipcRenderer.send('blades:edit', blade);
 		}
+
+		// Update blades
+		ipcRenderer.on('blades:updated', function(e, newBlades){
+			console.log(newBlades);
+			let newStens = newBlades.stens;
+			let newQuantity = newBlades.quantity;
+			let li = document.getElementById(newStens);
+			let ul = document.querySelector('ul');	
+			const editButton = document.createElement('button');
+			const deleteButton = document.createElement('button');
+			deleteButton.innerHTML = "Delete Blade";
+			deleteButton.className = "delete";
+			deleteButton.setAttribute("id", newStens);
+			deleteButton.onclick = deleteBlade;
+			editButton.innerHTML = "Edit Blade";
+			editButton.className = "edit";
+			editButton.setAttribute("id", newStens);
+			editButton.setAttribute("value", newQuantity);
+			editButton.onclick = editBlade;
+			newLI = document.createElement('li');
+			newLI.setAttribute('id', newStens);
+			const bladesText = document.createTextNode('Stens: ' + newStens + ' ' + 'Quantity: ' + newQuantity);
+			newLI.appendChild(bladesText);
+			newLI.appendChild(editButton);
+			newLI.appendChild(deleteButton);		
+			ul.replaceChild(newLI, li);
+		});
 
 		// Search for blades
 		let list = document.querySelector('ul');
