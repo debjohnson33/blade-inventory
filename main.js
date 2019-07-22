@@ -109,7 +109,7 @@ ipcMain.on('blades:add', function(e, stens, quantity){
 
 	  db.run("INSERT INTO Blades VALUES (?, ?)", [stens, quantity]);
 
-	  console.log(`A row has been inserted with rowid ${this.lastID}`);
+	  console.log(`A row has been inserted with stens ${stens}`);
 	});
 })
 // Catch blades:delete
