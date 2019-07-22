@@ -1,5 +1,8 @@
 const electron = require('electron');
+const url = require('url');
+const path = require('path');
 const {ipcRenderer} = electron;
+const BrowserWindow = electron.remote.BrowserWindow;
 const ul = document.querySelector('ul');
 
 // Load existing blades
@@ -27,7 +30,28 @@ document.addEventListener("DOMContentLoaded", function() {
             ul.appendChild(li);
         }
     })
+    const addButton = document.getElementById('addWindow');
+    addButton.onclick = createAddWindow;
 })
+// Handle create add window
+function createAddWindow() {
+	// Create new window
+	addWindow = new BrowserWindow({
+		width: 300,
+		height: 200,
+		title: 'Add Blades'
+	});
+	// Load html into window
+	addWindow.loadURL(url.format({
+		pathname: path.join(__dirname, 'addWindow.html'),
+		protocol: 'file:',
+		slashes: true
+	}));
+	// Garbage collection handle
+	addWindow.on('close', function () {
+		addWindow = null;
+	});
+}
 // Add blades
 ipcRenderer.on('blades:add', function(e, stens, quantity){
     const li = document.createElement('li');
@@ -39,6 +63,7 @@ ipcRenderer.on('blades:add', function(e, stens, quantity){
     li.appendChild(bladesText);
     li.appendChild(editButton);
     ul.appendChild(li);
+    addWindow.close();
 });
 // Delete blades
 //document.getElementById('delete').addEventListener('click', deleteBlade);

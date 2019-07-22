@@ -111,7 +111,6 @@ ipcMain.on('blades:add', function(e, stens, quantity){
 
 	  console.log(`A row has been inserted with rowid ${this.lastID}`);
 	});
-	addWindow.close();
 })
 // Catch blades:delete
 ipcMain.on('blades:delete', function(e, stens) {
