@@ -6,7 +6,22 @@ const {app, BrowserWindow, Menu, ipcMain} = electron;
 
 const sqlite3 = require('sqlite3');
 
-var db = new sqlite3.Database('dev.sqlite3');
+if(process.env.NODE_ENV !== 'production') {
+	var db = new sqlite3.Database('dev.sqlite3', (err) => {
+		if (err) {
+			console.log(err.message);
+		}
+		console.log('Connected to the development database');
+	});
+} else {
+	var db = new sqlite3.Database('database.sqlite3', (err) => {
+		if (err) {
+			console.log(err.message);
+		}
+		console.log('Connected to the production database');
+	});
+}
+
 
 // SET ENV
 
@@ -20,7 +35,10 @@ app.on('ready', function(){
 	db.serialize(function () {
 		// Loads each row into the blades array
 		db.each("SELECT * FROM Blades", function (err, row) {
-			bladesArray.push(row);	
+			bladesArray.push(row);
+			if (err) {
+				console.log(err.message);
+			}	
 		});
 	});
 

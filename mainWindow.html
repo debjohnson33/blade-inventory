@@ -21,7 +21,6 @@
 		document.addEventListener("DOMContentLoaded", function() {
 			ipcRenderer.send("mainWindowLoaded")
 			ipcRenderer.on("resultSent", function(e, result){
-				console.log(result);
 				for (var i = 0; i < result.length; i++) {
 					const li = document.createElement('li');
 					const editButton = document.createElement('button');
