@@ -29,9 +29,17 @@ document.addEventListener("DOMContentLoaded", function() {
             li.appendChild(deleteButton);
             ul.appendChild(li);
         }
+        if (result.length === 0 ) {
+            let ul = document.querySelector('ul');
+            let li = document.createElement('li');
+            const noBladesText = document.createTextNode('There are no blades yet')
+            li.appendChild(noBladesText);
+            ul.appendChild(li);
+        }
     })
     const addButton = document.getElementById('addWindow');
     addButton.onclick = createAddWindow;
+    
 })
 // Handle create add window
 function createAddWindow() {

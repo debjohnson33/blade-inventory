@@ -39,8 +39,8 @@ app.on('ready', function(){
 	db.serialize(function () {
 		// Loads each row into the blades array
 		db.each("SELECT * FROM Blades", function (err, row) {
-			console.log(row);
 			bladesArray.push(row);
+			console.log(bladesArray.length);
 			if (err) {
 				console.log(err.message);
 			}	
