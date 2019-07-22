@@ -16,29 +16,6 @@
 		<button type="submit">Edit Blades</button>
 	</form>
 
-	<script>
-		const electron = require('electron');
-		const {ipcRenderer} = electron;
-		
-		const form = document.querySelector('form');
-		ipcRenderer.on('blades:update', function(e, blade) {
-			let stensField = document.getElementById('stens');
-			let quantity = document.getElementById('quantity');
-			stensField.setAttribute('placeholder', blade.stens);
-			quantity.setAttribute('placeholder', blade.quantity);
-		});
-		form.addEventListener('submit', submitForm);
-		
-		function submitForm(e) {
-			e.preventDefault();
-			let stens = document.querySelector('#stens').value;
-			let quantity = document.querySelector('#quantity').value;
-			let stensField = document.getElementById('stens');
-			let placeholder = stensField.placeholder;
-			let newBlades = {'placeholderStens': placeholder, 'stens': stens, 'quantity': quantity};
-			
-			ipcRenderer.send('blades:update', newBlades);
-		}
-	</script>
+	<script src="./render/editWindow.js"></script>
 </body>
 </html>
