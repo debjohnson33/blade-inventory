@@ -57,11 +57,20 @@ ipcRenderer.on('blades:add', function(e, stens, quantity){
     const li = document.createElement('li');
     const button = document.createElement('button');
     const editButton = document.createElement('button');
+    const deleteButton = document.createElement('button');
+    deleteButton.innerHTML = "Delete Blade";
+    deleteButton.className = "delete";
+    deleteButton.setAttribute("id", stens);
+    deleteButton.onclick = deleteBlade;
     editButton.innerHTML = "Edit Blade"
     editButton.className = "edit"
+    editButton.setAttribute("id", stens);
+    editButton.setAttribute("value", quantity);
+    editButton.onclick = editBlade;
     const bladesText = document.createTextNode('Stens: ' + stens + ' ' + 'Quantity: ' + quantity);
     li.appendChild(bladesText);
     li.appendChild(editButton);
+    li.appendChild(deleteButton);
     ul.appendChild(li);
     addWindow.close();
 });
