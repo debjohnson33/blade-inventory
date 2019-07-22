@@ -10,6 +10,8 @@ if(process.env.NODE_ENV !== 'production') {
 	var db = new sqlite3.Database('dev.sqlite3', (err) => {
 		if (err) {
 			console.log(err.message);
+		} else {
+			db.run('CREATE TABLE IF NOT EXISTS Blades (id INTEGER PRIMARY KEY AUTOINCREMENT, stensNumber TEXT, quantity INTEGER, manufacturerNumber INTEGER)')
 		}
 		console.log('Connected to the development database');
 	});
@@ -17,6 +19,8 @@ if(process.env.NODE_ENV !== 'production') {
 	var db = new sqlite3.Database('database.sqlite3', (err) => {
 		if (err) {
 			console.log(err.message);
+		} else {
+			db.run('CREATE TABLE IF NOT EXISTS blades (id INTEGER PRIMARY KEY AUTOINCREMENT, stensNumber text, quantity INTEGER, manufacturerNumber INTEGER)')
 		}
 		console.log('Connected to the production database');
 	});
@@ -35,6 +39,7 @@ app.on('ready', function(){
 	db.serialize(function () {
 		// Loads each row into the blades array
 		db.each("SELECT * FROM Blades", function (err, row) {
+			console.log(row);
 			bladesArray.push(row);
 			if (err) {
 				console.log(err.message);
