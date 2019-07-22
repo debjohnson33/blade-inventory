@@ -11,7 +11,7 @@ if(process.env.NODE_ENV !== 'production') {
 		if (err) {
 			console.log(err.message);
 		} else {
-			db.run('CREATE TABLE IF NOT EXISTS Blades (id INTEGER PRIMARY KEY AUTOINCREMENT, stensNumber TEXT, quantity INTEGER, manufacturerNumber INTEGER)')
+			db.run('CREATE TABLE IF NOT EXISTS Blades (id INTEGER PRIMARY KEY AUTOINCREMENT, stensNumber TEXT, quantity INTEGER, manufacturerNumber TEXT)')
 		}
 		console.log('Connected to the development database');
 	});
@@ -20,7 +20,7 @@ if(process.env.NODE_ENV !== 'production') {
 		if (err) {
 			console.log(err.message);
 		} else {
-			db.run('CREATE TABLE IF NOT EXISTS blades (id INTEGER PRIMARY KEY AUTOINCREMENT, stensNumber text, quantity INTEGER, manufacturerNumber INTEGER)')
+			db.run('CREATE TABLE IF NOT EXISTS blades (id INTEGER PRIMARY KEY AUTOINCREMENT, stensNumber text, quantity INTEGER, manufacturerNumber TEXT)')
 		}
 		console.log('Connected to the production database');
 	});
@@ -108,13 +108,13 @@ function createEditWindow() {
 	});
 }
 // Catch blades:add
-ipcMain.on('blades:add', function(e, stens, quantity){
-	mainWindow.webContents.send('blades:add', stens, quantity);
+ipcMain.on('blades:add', function(e, stens, quantity, manNum){
+	mainWindow.webContents.send('blades:add', stens, quantity, manNum);
 	db.serialize(function () {
 
-	  db.run("INSERT INTO Blades VALUES (?, ?)", [stens, quantity]);
+	  db.run("INSERT INTO Blades VALUES (?, ?, ?)", [stens, quantity, manNum]);
 
-	  console.log(`A row has been inserted with stens ${stens}`);
+	  console.log(`A row has been inserted with rowid ${this.lastID}`);
 	});
 })
 // Catch blades:delete
