@@ -9,6 +9,7 @@ const ul = document.querySelector('ul');
 document.addEventListener("DOMContentLoaded", function() {
     ipcRenderer.send("mainWindowLoaded")
     ipcRenderer.on("resultSent", function(e, result){
+        console.log(result);
         for (var i = 0; i < result.length; i++) {
             const li = document.createElement('li');
             const editButton = document.createElement('button');
@@ -23,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
             editButton.setAttribute("value", result[i].quantity);
             editButton.onclick = editBlade;
             li.setAttribute('id', result[i].stensNumber);
-            const bladesText = document.createTextNode('Stens: ' + result[i].stensNumber + ' ' + 'Quantity: ' + result[i].quantity + '   ');
+            const bladesText = document.createTextNode('Stens: ' + result[i].stensNumber + ' ' + 'Quantity: ' + result[i].quantity + ' ' + 'OEM/Manufacturer Number: ' + result[i].manufacturerNumber + '   ');
             li.appendChild(bladesText);
             li.appendChild(editButton);
             li.appendChild(deleteButton);
@@ -61,9 +62,8 @@ function createAddWindow() {
 	});
 }
 // Add blades
-ipcRenderer.on('blades:add', function(e, stens, quantity){
+ipcRenderer.on('blades:add', function(e, stens, quantity, manNum){
     const li = document.createElement('li');
-    const button = document.createElement('button');
     const editButton = document.createElement('button');
     const deleteButton = document.createElement('button');
     deleteButton.innerHTML = "Delete Blade";
@@ -75,7 +75,7 @@ ipcRenderer.on('blades:add', function(e, stens, quantity){
     editButton.setAttribute("id", stens);
     editButton.setAttribute("value", quantity);
     editButton.onclick = editBlade;
-    const bladesText = document.createTextNode('Stens: ' + stens + ' ' + 'Quantity: ' + quantity + '  ');
+    const bladesText = document.createTextNode('Stens: ' + stens + ' ' + 'Quantity: ' + quantity + ' ' + 'OEM/Manufacturer Number: ' + manNum + '  ');
     li.appendChild(bladesText);
     li.appendChild(editButton);
     li.appendChild(deleteButton);
@@ -119,7 +119,7 @@ ipcRenderer.on('blades:updated', function(e, newBlades){
     editButton.onclick = editBlade;
     newLI = document.createElement('li');
     newLI.setAttribute('id', newStens);
-    const bladesText = document.createTextNode('Stens: ' + newStens + ' ' + 'Quantity: ' + newQuantity + '   ');
+    const bladesText = document.createTextNode('Stens: ' + newStens + ' ' + 'Quantity: ' + ' ' + newQuantity + '   ');
     newLI.appendChild(bladesText);
     newLI.appendChild(editButton);
     newLI.appendChild(deleteButton);		
