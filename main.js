@@ -111,6 +111,11 @@ function createEditWindow() {
 		editWindow = null;
 	});
 }
+
+function handleDialog(options) {
+	let response = dialog.showMessageBox(mainWindow, options);
+	console.log(response);
+}
 // Catch blades:add
 ipcMain.on('blades:add', function(e, stens, quantity, manNum){
 	mainWindow.webContents.send('blades:add', stens, quantity, manNum);
@@ -124,8 +129,7 @@ ipcMain.on('blades:add', function(e, stens, quantity, manNum){
 		buttons: ["Okay"],
 		message: "Your blades were added to the database"
 	}
-	let response = dialog.showMessageBox(mainWindow, options);
-	console.log(response);
+	handleDialog(options);
 })
 // Catch blades:delete
 ipcMain.on('blades:delete', function(e, stens) {
