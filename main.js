@@ -1,6 +1,7 @@
 const electron = require('electron');
 const url = require('url');
 const path = require('path');
+const { dialog } = require('electron');
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
@@ -117,8 +118,14 @@ ipcMain.on('blades:add', function(e, stens, quantity, manNum){
 
 	  db.run("INSERT INTO Blades VALUES (NULL, ?, ?, ?)", [ stens, quantity, manNum]);
 
-	  console.log(`A row has been inserted with rowid ${this.lastID}`);
+	  console.log(`A row has been inserted with Stens: ${stens}`);
 	});
+	let options = {
+		buttons: ["Okay"],
+		message: "Your blades were added to the database"
+	}
+	let response = dialog.showMessageBox(mainWindow, options);
+	console.log(response);
 })
 // Catch blades:delete
 ipcMain.on('blades:delete', function(e, stens) {
