@@ -138,6 +138,11 @@ ipcMain.on('blades:delete', function(e, stens) {
 		db.run("DELETE FROM Blades WHERE stensNumber=?", stens);
 		console.log(`Those blades have been deleted`);
 	});
+	let options = {
+		buttons: ["Okay"],
+		message: "The blades were deleted from the database"
+	}
+	handleDialog(options);
 })
 
 // Catch blades:edit
@@ -158,6 +163,11 @@ ipcMain.on('blades:update', function(e, blade) {
 		//newBlade = db.run("SELECT * FROM Blades WHERE stensNumber=?", blade.stens)
 	})
 	editWindow.close();
+	let options = {
+		buttons: ["Okay"],
+		message: "The blades were updated"
+	}
+	handleDialog(options);
 })
 // Create menu Template
 const mainMenuTemplate = [
