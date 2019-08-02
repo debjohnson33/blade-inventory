@@ -117,11 +117,11 @@ function handleDialog(options) {
 	console.log(response);
 }
 // Catch blades:add
-ipcMain.on('blades:add', function(e, stens, quantity, manNum){
-	mainWindow.webContents.send('blades:add', stens, quantity, manNum);
+ipcMain.on('blades:add', function(e, {stens, quantity, manufacturer}){
+	mainWindow.webContents.send('blades:add', stens, quantity, manufacturer);
 	db.serialize(function () {
 
-	  db.run("INSERT INTO Blades VALUES (NULL, ?, ?, ?)", [ stens, quantity, manNum]);
+	  db.run("INSERT INTO Blades VALUES (NULL, ?, ?, ?)", [ stens, quantity, manufacturer]);
 
 	  console.log(`A row has been inserted with Stens: ${stens}`);
 	});

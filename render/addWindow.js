@@ -9,7 +9,7 @@ function submitForm(e) {
     let stens = document.querySelector('#stens').value;
     let quantity = document.querySelector('#quantity').value;
     let manufacturer = document.querySelector('#manNum').value;
-    let newBlades = [stens, quantity];
+    let newBlades = {'stens': stens, 'quantity': quantity, 'manufacturer': manufacturer};
     
-    ipcRenderer.send('blades:add', stens, quantity, manufacturer);
+    ipcRenderer.send('blades:add', newBlades);
 }
