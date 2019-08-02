@@ -147,6 +147,7 @@ ipcMain.on('blades:delete', function(e, stens) {
 
 // Catch blades:edit
 ipcMain.on('blades:edit', function(e, blade) {
+	console.log(blade);
 	createEditWindow();
 	editWindow.webContents.once('dom-ready', () => {
 		editWindow.webContents.send('blades:update', blade);
@@ -155,7 +156,7 @@ ipcMain.on('blades:edit', function(e, blade) {
 
 // Catch blades:update
 ipcMain.on('blades:update', function(e, blade) {
-	let newBlades = {'stens': blade.placeholderStens, 'quantity': blade.quantity};
+	let newBlades = {'stens': blade.placeholderStens, 'quantity': blade.quantity, 'manufacturer': blade.manufacturers};
 	mainWindow.webContents.send('blades:updated', newBlades);
 	db.serialize(function() {
 		db.run("UPDATE Blades SET stensNumber=? WHERE stensNumber=?", [blade.stens, blade.placeholderStens]);

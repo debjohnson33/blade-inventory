@@ -94,14 +94,13 @@ function deleteBlade(e) {
 // Send call back to main to open edit window
 function editBlade(e) {
     e.preventDefault();
-    let blade = {stens: e.target.id, quantity: e.target.value}
+    let blade = {stens: e.target.id, quantity: e.target.value, manufacturer: e.target.value} // need way to capture manufacturer
     
     ipcRenderer.send('blades:edit', blade);
 }
 
 // Update blades
 ipcRenderer.on('blades:updated', function(e, newBlades){
-    console.log(newBlades);
     let newStens = newBlades.stens;
     let newQuantity = newBlades.quantity;
     let li = document.getElementById(newStens);
