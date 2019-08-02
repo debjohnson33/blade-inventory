@@ -19,7 +19,9 @@
     "electron-rebuild": "^1.7.3"
   },
   "dependencies": {
+    "ajv": "^6.10.2",
     "electron": "^2.0.18",
+    "electron-redux": "^1.4.0",
     "request": "^2.88.0",
     "sqlite3": "^4.0.6"
   }
