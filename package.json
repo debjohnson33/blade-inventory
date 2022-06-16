@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "ajv": "^6.10.2",
-    "electron": "^9.4.0",
+    "electron": "^15.5.5",
     "electron-redux": "^1.4.0",
     "request": "^2.88.0",
     "sqlite3": "^4.0.6"
